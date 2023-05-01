@@ -1,0 +1,26 @@
+CREATE TABLE `Customer` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(45) NULL,
+  `Email` VARCHAR(45) NULL,
+  `Phone` VARCHAR(45) NULL,
+  PRIMARY KEY (`Id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_danish_ci;
+
+CREATE TABLE `CustomerLog` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `Event` VARCHAR(45) NULL,
+  `Details` VARCHAR(45) NULL,
+  `Created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `CustomerId` VARCHAR(45) NULL,
+  PRIMARY KEY (`Id`),
+  CONSTRAINT `customerID`
+    FOREIGN KEY (`Id`)
+    REFERENCES `Customer` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_danish_ci;
+
