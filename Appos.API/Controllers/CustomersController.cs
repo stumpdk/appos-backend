@@ -10,11 +10,10 @@ namespace appos.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly ICustomerUnitOfWork customerUnitOfWork;
-
-        public CustomersController(ICustomerUnitOfWork customerUnitOfWork)
+        public GenericRepository<Customer> customerRepository;
+        public CustomersController(GenericRepository<Customer> customerRepository)
         {
-            this.customerUnitOfWork = customerUnitOfWork;
+            this.customerRepository = customerRepository;
         }
 
         // GET: api/<ValuesController>
@@ -22,7 +21,7 @@ namespace appos.Controllers
         [ProducesResponseType(typeof(List<Customer>), StatusCodes.Status200OK)]
         public IResult Get()
         {
-            return Results.Ok(customerUnitOfWork.CustomerRepository.GetAll());
+            return Results.Ok(customerRepository.GetAll());
         }
 
         // GET api/<ValuesController>/5
@@ -30,7 +29,7 @@ namespace appos.Controllers
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         public IResult Get(int id)
         {
-            return Results.Ok(customerUnitOfWork.CustomerRepository.Get(id));
+            return Results.Ok(customerRepository.Get(id));
         }
 
         // POST api/<ValuesController>
@@ -41,14 +40,11 @@ namespace appos.Controllers
             //TODO: Validate input
             try
             {
-                var newId = customerUnitOfWork.CustomerRepository.Add(customer);
-                customerUnitOfWork.CustomerLogRepository.Add(new CustomerLog() { Event = "Add", Details = customer.ToString(), Created = DateTime.Now, CustomerId = newId });
-                customerUnitOfWork.Commit();
-                return Results.Created<Customer>($"/customers/{newId}",customerUnitOfWork.CustomerRepository.Get(newId));
+                var newId = customerRepository.Add(customer);
+                return Results.Created<Customer>($"/customers/{newId}",customerRepository.Get(newId));
             }
             catch (Exception ex)
             {
-                customerUnitOfWork.Rollback();
                 return Results.Problem("Could not add customer: " + ex.Message);
             }
         }
@@ -61,7 +57,7 @@ namespace appos.Controllers
         {
             //TODO: Validate input
             //TODO: Validate/use id
-            var customerToUpdate = customerUnitOfWork.CustomerRepository.Get(customer.Id);
+            var customerToUpdate = customerRepository.Get(customer.Id);
             if (customerToUpdate == null)
             {
                 //TODO: 
@@ -75,14 +71,11 @@ namespace appos.Controllers
 
             try
             {
-                var updatedCustomer = customerUnitOfWork.CustomerRepository.Update(customer);
-                customerUnitOfWork.CustomerLogRepository.Add(new CustomerLog() { Event = "Update", Details = customer.ToString(), Created = DateTime.Now, CustomerId = id });
-                customerUnitOfWork.Commit();
+                var updatedCustomer = customerRepository.Update(customer);
                 return Results.Ok(updatedCustomer);
             }
             catch (Exception ex)
             {
-                customerUnitOfWork.Rollback();
                 return Results.Problem("Could not update customer: " + ex.Message);
             }
         }
@@ -93,20 +86,21 @@ namespace appos.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Delete(int id)
         {
-            var customer = customerUnitOfWork.CustomerRepository.Get(id);
+            var customer = customerRepository.Get(id);
 
             //TODO: Validate if customer exists
+            if(customer == null)
+            {
+                return Results.Problem("Could not delete Customer as it does not exist");
+            }
 
             try
             {
-                customerUnitOfWork.CustomerRepository.Delete(customer);
-                customerUnitOfWork.CustomerLogRepository.Add(new CustomerLog() { Event = "Delete", Details = customer.ToString(), Created = DateTime.Now, CustomerId = id });
-                customerUnitOfWork.Commit();
+                customerRepository.Delete(customer);
                 return Results.Ok();
             }
             catch (Exception ex)
             {
-                customerUnitOfWork.Rollback();
                 return Results.Problem("Could not delete customer: " + ex.Message);
             }
         }

@@ -59,8 +59,6 @@ namespace appos
                 new MySqlConnection(Configuration.GetConnectionString("Default")));
 
             services.AddScoped<IGenericRepository<Customer>, CustomerRepository>();
-            services.AddScoped<IGenericRepository<CustomerLog>, CustomerLogRepository>();
-            services.AddScoped<ICustomerUnitOfWork, CustomerUnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
