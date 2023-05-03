@@ -13,10 +13,10 @@ CREATE TABLE `CustomerLog` (
   `Event` VARCHAR(45) NULL,
   `Details` VARCHAR(45) NULL,
   `Created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `CustomerId` VARCHAR(45) NULL,
+  `CustomerId` INT NOT NULL,
   PRIMARY KEY (`Id`),
   CONSTRAINT `customerID`
-    FOREIGN KEY (`Id`)
+    FOREIGN KEY (`CustomerId`)
     REFERENCES `Customer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
