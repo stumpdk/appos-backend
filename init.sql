@@ -7,20 +7,3 @@ CREATE TABLE `Customer` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_danish_ci;
-
-CREATE TABLE `CustomerLog` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
-  `Event` VARCHAR(45) NULL,
-  `Details` VARCHAR(45) NULL,
-  `Created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `CustomerId` INT NOT NULL,
-  PRIMARY KEY (`Id`),
-  CONSTRAINT `customerID`
-    FOREIGN KEY (`CustomerId`)
-    REFERENCES `Customer` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_danish_ci;
-
