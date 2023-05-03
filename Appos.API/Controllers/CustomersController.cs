@@ -35,6 +35,7 @@ namespace appos.Controllers
         // POST api/<ValuesController>
         [HttpPost]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Post([FromBody] Customer customer)
         {
             //TODO: Validate input
@@ -45,23 +46,22 @@ namespace appos.Controllers
             }
             catch (Exception ex)
             {
-                return Results.Problem("Could not add customer: " + ex.Message);
+                return Results.Problem("Could not add customer: " + ex.Message, null, StatusCodes.Status500InternalServerError);
             }
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Put(int id, [FromBody] Customer customer)
         {
             //TODO: Validate input
-            //TODO: Validate/use id
             var customerToUpdate = customerRepository.Get(customer.Id);
             if (customerToUpdate == null)
             {
-                //TODO: 
-                return Results.Problem("problem");
+                return Results.Problem("Could not update the customer as it does not exist", null, StatusCodes.Status400BadRequest);
             }
 
             if (customer.Equals(customerToUpdate))
@@ -76,22 +76,22 @@ namespace appos.Controllers
             }
             catch (Exception ex)
             {
-                return Results.Problem("Could not update customer: " + ex.Message);
+                return Results.Problem("Could not update customer: " + ex.Message, null, StatusCodes.Status500InternalServerError);
             }
         }
 
         // DELETE api/<ValuesController>/5
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Delete(int id)
         {
             var customer = customerRepository.Get(id);
 
-            //TODO: Validate if customer exists
             if(customer == null)
             {
-                return Results.Problem("Could not delete Customer as it does not exist");
+                return Results.Problem("Could not delete Customer as it does not exist", null, StatusCodes.Status400BadRequest);
             }
 
             try
@@ -101,7 +101,7 @@ namespace appos.Controllers
             }
             catch (Exception ex)
             {
-                return Results.Problem("Could not delete customer: " + ex.Message);
+                return Results.Problem("Could not delete customer: " + ex.Message, null, StatusCodes.Status500InternalServerError);
             }
         }
     }
