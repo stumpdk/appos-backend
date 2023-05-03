@@ -28,7 +28,7 @@ namespace Appos.Lib.DAL
             throw new NotImplementedException();
         }
 
-        public virtual TEntity Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }

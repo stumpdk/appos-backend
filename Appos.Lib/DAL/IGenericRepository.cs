@@ -12,6 +12,6 @@ namespace Appos.Lib.DAL
         TEntity Get(int Id);
         int Add(TEntity entity);
         TEntity Update(TEntity entity);
-        TEntity Delete(TEntity entity);
+        void Delete(TEntity entity);
     }
 }
