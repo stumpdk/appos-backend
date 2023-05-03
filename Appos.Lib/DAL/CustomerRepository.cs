@@ -40,9 +40,9 @@ namespace Appos.Lib.DAL
             return Get(customer.Id);
         }
 
-        public override Customer Delete(Customer entity)
+        public override void Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            SqlMapper.Execute(_dbConnection, @"DELETE FROM Customer WHERE id = @Id LIMIT 1", customer);
         }
     }
 }
