@@ -10,8 +10,8 @@ namespace appos.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        public GenericRepository<Customer> customerRepository;
-        public CustomersController(GenericRepository<Customer> customerRepository)
+        public IGenericRepository<Customer> customerRepository;
+        public CustomersController(IGenericRepository<Customer> customerRepository)
         {
             this.customerRepository = customerRepository;
         }
