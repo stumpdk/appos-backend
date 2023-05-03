@@ -10,7 +10,7 @@ using static Dapper.SqlMapper;
 
 namespace Appos.Lib.DAL
 {
-    public class CustomerRepository : GenericRepository<Customer>
+    public class CustomerRepository : IGenericRepository<Customer>
     {
         readonly IDbConnection _dbConnection;
 
@@ -19,28 +19,28 @@ namespace Appos.Lib.DAL
             _dbConnection = dbConnection;
         }
 
-        public override IEnumerable<Customer> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             return SqlMapper.Query<Customer>(_dbConnection, "SELECT Id, Name, Phone, Email FROM Customer WHERE 1");
         }
 
-        public override Customer? Get(int id)
+        public Customer? Get(int id)
         {
             return SqlMapper.Query<Customer>(_dbConnection, "SELECT * FROM Customer WHERE Id = @Id", new { Id = id }).FirstOrDefault();
         }
-        public override int Add(Customer customer)
+        public int Add(Customer customer)
         {
             return SqlMapper.ExecuteScalar<int>(_dbConnection, "INSERT INTO Customer (Name, Email, Phone) VALUES (@Name,@Email,@Phone);select LAST_INSERT_ID();", customer);
         }
 
-        public override Customer Update(Customer customer)
+        public Customer Update(Customer customer)
         {
             SqlMapper.Execute(_dbConnection, @"UPDATE Customer SET Name = @Name, Email = @Email, Phone = @Phone WHERE id = @Id", customer);
 
             return Get(customer.Id);
         }
 
-        public override void Delete(Customer customer)
+        public void Delete(Customer customer)
         {
             SqlMapper.Execute(_dbConnection, @"DELETE FROM Customer WHERE id = @Id LIMIT 1", customer);
         }
