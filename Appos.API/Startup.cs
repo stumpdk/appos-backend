@@ -38,7 +38,7 @@ namespace appos
                 );
             });
 
-            // Add services to the container.
+            // Add controllers to the container.
             services.AddControllers();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -49,11 +49,6 @@ namespace appos
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo() { Title = "Appos API", Version = "1.0" });
             });
-
-            services.AddControllersWithViews()
-                .AddNewtonsoftJson(options =>
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
 
             services.AddTransient<IDbConnection>(x =>
                 new MySqlConnection(Configuration.GetConnectionString("Default")));
