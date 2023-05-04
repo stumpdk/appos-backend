@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appos.API", "Appos.API\Appos.API.csproj", "{43C91549-71FC-491B-8917-A4B8337CC4C4}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Appos.Frontend", "Appos.Frontend\Appos.Frontend.esproj", "{336FC3F5-9FD5-4457-B39E-C7141906B9F4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Appos.Lib", "Appos.Lib\Appos.Lib.csproj", "{3E69A8CF-E2CD-4A5C-B896-7357CB6B6243}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Appos.Frontend", "appos-frontend\Appos.Frontend.esproj", "{3177627A-22F1-486A-AB44-EB3F5064D853}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,16 @@ Global
 		{43C91549-71FC-491B-8917-A4B8337CC4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C91549-71FC-491B-8917-A4B8337CC4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C91549-71FC-491B-8917-A4B8337CC4C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{336FC3F5-9FD5-4457-B39E-C7141906B9F4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{3E69A8CF-E2CD-4A5C-B896-7357CB6B6243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E69A8CF-E2CD-4A5C-B896-7357CB6B6243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E69A8CF-E2CD-4A5C-B896-7357CB6B6243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E69A8CF-E2CD-4A5C-B896-7357CB6B6243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3177627A-22F1-486A-AB44-EB3F5064D853}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

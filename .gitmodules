@@ -1,0 +1,3 @@
+[submodule "appos-frontend"]
+	path = appos-frontend
+	url = https://github.com/stumpdk/appos-frontend.git
