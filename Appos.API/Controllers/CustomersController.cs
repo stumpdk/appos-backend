@@ -16,7 +16,7 @@ namespace appos.Controllers
             this.customerRepository = customerRepository;
         }
 
-        // GET: api/<ValuesController>
+        // GET: api/Customer
         [HttpGet]
         [ProducesResponseType(typeof(List<Customer>), StatusCodes.Status200OK)]
         public IResult Get()
@@ -24,7 +24,7 @@ namespace appos.Controllers
             return Results.Ok(customerRepository.GetAll());
         }
 
-        // GET api/<ValuesController>/5
+        // GET api/Customer/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         public IResult Get(int id)
@@ -32,13 +32,13 @@ namespace appos.Controllers
             return Results.Ok(customerRepository.Get(id));
         }
 
-        // POST api/<ValuesController>
+        // POST api/Customer
         [HttpPost]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Post([FromBody] Customer customer)
         {
-            //TODO: Validate input
             try
             {
                 var newId = customerRepository.Add(customer);
@@ -50,14 +50,13 @@ namespace appos.Controllers
             }
         }
 
-        // PUT api/<ValuesController>/5
+        // PUT api/Customer/5
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IResult Put(int id, [FromBody] Customer customer)
         {
-            //TODO: Validate input
             var customerToUpdate = customerRepository.Get(customer.Id);
             if (customerToUpdate == null)
             {
@@ -80,7 +79,7 @@ namespace appos.Controllers
             }
         }
 
-        // DELETE api/<ValuesController>/5
+        // DELETE api/Customer/5
         [HttpDelete("{id}")]
         [ProducesResponseType(typeof(Customer), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status400BadRequest)]
